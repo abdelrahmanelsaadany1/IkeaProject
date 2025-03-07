@@ -24,7 +24,7 @@ namespace Ikea.BLL.Services.Departments
                 {
                     Id = D.Id,
                     Code = D.Code,
-                    Description = D.Description,
+                   
                     Name = D.Name,
                     CreationDate = D.CreationDate
                 }).AsNoTracking().ToList();

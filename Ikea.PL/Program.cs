@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ikea.DAL.Presistance.Data;
 using Ikea.DAL.Presistance.Repositories.Departments;
+using Ikea.BLL.Services.Departments;
 namespace Ikea.PL
 {
     public class Program
@@ -22,6 +23,7 @@ namespace Ikea.PL
 
             ) );
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
             #endregion
 
