@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using Ikea.DAL.Models.Employees;
 
 
 namespace Ikea.DAL.Presistance.Data
@@ -26,6 +27,7 @@ namespace Ikea.DAL.Presistance.Data
 
         #region DbSets
         public DbSet<Department> Departments { get; set; } = null!;
+        public DbSet<Employee> Employees { get; set; } = null!;
         #endregion
     }
 }
