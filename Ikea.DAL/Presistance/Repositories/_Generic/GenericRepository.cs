@@ -1,5 +1,5 @@
 ﻿using Ikea.DAL.Models;
-using Ikea.DAL.Models;
+
 using Ikea.DAL.Presistance.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,9 +28,9 @@ namespace Ikea.DAL.Presistance.Repositories._Generic
         {
             if (WithAsNoTracking)
             {
-                _dbContext.Set<T>().AsNoTracking().ToList();
+                _dbContext.Set<T>().Where(x=>!x.IsDeleted).AsNoTracking().ToList();
             }
-            return _dbContext.Set<T>().ToList();
+            return _dbContext.Set<T>().Where(x => !x.IsDeleted).ToList();
         }
 
         public T? GetById(int id)
@@ -54,7 +54,8 @@ namespace Ikea.DAL.Presistance.Repositories._Generic
         }
         public int Delete(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            entity.IsDeleted = true;
+            _dbContext.Set<T>().Update(entity);
             return _dbContext.SaveChanges();
         }
 
