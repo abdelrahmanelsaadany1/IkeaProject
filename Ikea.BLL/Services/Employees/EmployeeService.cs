@@ -105,5 +105,29 @@ namespace Ikea.BLL.Services.Employees
             };
             return _employeeRepository.Update(employee);
         }
+
+        public IEnumerable<EmployeeDto> GetEmployee(string search)
+        {
+            return _employeeRepository.GetAllQueryable()
+                .Where(E => !E.IsDeleted && (string.IsNullOrEmpty(search) || E.Name.ToLower().Contains(search.ToLower())))
+                
+                .Select(employee => new EmployeeDto()
+                {
+                    Id = employee.Id,
+                    Name = employee.Name,
+                    Age = employee.Age,
+                    IsActive = employee.IsActive,
+                    Salary = employee.Salary,
+                    Email = employee.Email,
+                    Gender = employee.Gender.ToString(),
+                    EmployeeType = employee.EmployeeType.ToString(),
+                    
+                });
+        }
+
+        public IEnumerable<EmployeeDto> GetEmployee()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
